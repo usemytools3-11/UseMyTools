@@ -1,11 +1,12 @@
 import React from 'react';
+import Tools from '../containers/Tools';
 import { connect } from 'react-redux';
 
-const HomePage = (props) => {
+const ToolsPage = (props) => {
     return (
         <>
-            <h1>HomePage</h1>
-            Authenticated: {props.authenticated ? "YES" : "NO"}
+            <h1>Tools page</h1>
+            {props.authenticated && <Tools />}
         </>
     );
 }
@@ -20,4 +21,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ToolsPage);

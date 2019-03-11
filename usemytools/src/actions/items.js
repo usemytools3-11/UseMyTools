@@ -1,3 +1,3 @@
 import {
-    ERROR
+    // ERROR
 } from '../constants/actionTypes';
