@@ -10,6 +10,10 @@ const Routes = (props) => {
             <Switch>
                 <Route path="/" exact render={() => <HomePage />}/>
                 <Route path="/login" exact render={() => <LoginPage />}/>
+                <Route path="/profile" exact render={() => <div>Profile</div>}/>
+                <Route path="/tools" exact render={() => <div>Tools</div>}/>
+                <Route path="/tools/:id" exact render={(props) => <div>Tool {props.match.params.id}</div>}/>
+                <Route path="/login" exact render={() => <LoginPage />}/>
             </Switch>
         </BrowserRouter>
     );
