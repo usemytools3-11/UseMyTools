@@ -8,15 +8,17 @@ import {
     USER_REGISTRATION_FAILURE,
     USER_LOGOUT_REQUEST,
     USER_LOGOUT_SUCCESS,
-    USER_LOGOUT_FAILURE
+    USER_LOGOUT_FAILURE,
+    USER_DATA_FETCH_REQUEST,
+    USER_DATA_FETCH_SUCCESS,
+    USER_DATA_FETCH_FAILURE
 } from '../constants/actionTypes';
-
 
 const initialState = {
     authenticated: localStorage.getItem('jwt-authenticated') || false,
     isFetching: false,
     error: null,
-    token: null,
+    token: localStorage.getItem('jwt') || null,
     user: null
 }
 
@@ -29,12 +31,13 @@ export default (state = initialState, action) => {
             }
 
         case USER_LOGIN_SUCCESS:
+            localStorage.setItem('jwt', action.payload.token);
+            localStorage.setItem('jwt-authenticated', true);
             return {
                 ...state,
                 isFetching: false,
-                authenticated: true,
-                token: action.payload.token,
-                user: action.payload
+                token: localStorage.getItem('jwt') || null,
+                authenticated: localStorage.getItem('jwt-authenticated') || false
             }
 
         case USER_LOGIN_FAILURE:
@@ -69,9 +72,12 @@ export default (state = initialState, action) => {
             }
         
         case USER_LOGOUT_SUCCESS:
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('jwt-authenticated');
             return {
                 ...state,
-                authenticated: false
+                token: localStorage.getItem('jwt') || null,
+                authenticated: localStorage.getItem('jwt-authenticated') || false
             }
 
         case USER_LOGOUT_FAILURE:
@@ -84,6 +90,25 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+        
+        case USER_DATA_FETCH_REQUEST:
+            return {
+                ...state,
+                isFetching: true
+            }
+
+        case USER_DATA_FETCH_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                user: action.payload
+            }
+
+        case USER_DATA_FETCH_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
             }
 
         default:
