@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserData } from '../actions';
+import { getUserData, fetchTools } from '../actions';
+import { Link } from 'react-router-dom';
 
 class ToolsPage extends Component {
     componentDidMount() {
         if(this.props.first_name.length === 0 || this.props.last_name.length === 0 || this.props.email.length === 0){
             this.props.getUserData();
+        }
+        if(this.props.tools.length === 0){
+            this.props.fetchTools();
         }
     }
 
@@ -17,7 +21,7 @@ class ToolsPage extends Component {
                 <p>{this.props.email}</p>
 
                 <h1>Your items:</h1>
-                {this.props.tools.map(elem =><p key={elem.id}>{elem.name}</p>)}
+                {this.props.tools.filter(elem => elem.lender_id === this.props.userID).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
 
                 <h1>Items you borrowed:</h1>
             </>
@@ -31,12 +35,13 @@ const mapStateToProps = state => {
         last_name: state.auth.user ? state.auth.user.last_name : '',
         email: state.auth.user ? state.auth.user.email : '',
         userID: state.auth.user ? state.auth.user.id : -1,
-        tools: state.items.tools ? state.items.tools.filter(elem => elem.owner_id === state.auth.user.id) : []
+        tools: state.items.tools || []
     }
 }
 
 const mapDispatchToProps = {
-    getUserData
+    getUserData,
+    fetchTools
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToolsPage);

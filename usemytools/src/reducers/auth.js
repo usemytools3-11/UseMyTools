@@ -102,7 +102,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                user: action.payload[0]
+                user: action.payload
             }
 
         case USER_DATA_FETCH_FAILURE:
