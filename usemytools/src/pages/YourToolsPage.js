@@ -19,7 +19,13 @@ class ToolsPage extends Component {
             <>
                 <h1>Your Tools page</h1>
                 <Link to="/tools/new">Add new tool</Link>
-                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID)} />}
+
+                <br/>
+                <h1>Available</h1>
+                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed)} />}
+
+                <h1>Borrowed</h1>
+                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed)} />}
             </>
         );
     }
