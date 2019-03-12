@@ -192,7 +192,7 @@ export function deleteTool(id){
             .delete(API_URL+`/tools/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
-                    dispatch(receiveDeleteTool(res.data));
+                    dispatch(receiveDeleteTool(id));
                     history.push('/tools');
                 }else{
                     dispatch(errorDeleteTool(res.data.error));
@@ -210,10 +210,10 @@ export function deleteTool(id){
         }
     }
 
-    function receiveDeleteTool(item){
+    function receiveDeleteTool(id){
         return {
             type: ITEM_DELETE_SUCCESS,
-            payload: item.id
+            payload: id
         }
     }
 
