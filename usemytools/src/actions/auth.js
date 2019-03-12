@@ -8,7 +8,10 @@ import {
     USER_REGISTRATION_FAILURE,
     USER_LOGOUT_REQUEST,
     USER_LOGOUT_SUCCESS,
-    USER_LOGOUT_FAILURE
+    USER_LOGOUT_FAILURE,
+    USER_DATA_FETCH_REQUEST,
+    USER_DATA_FETCH_SUCCESS,
+    USER_DATA_FETCH_FAILURE
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
@@ -63,9 +66,8 @@ export function loginUser(credentials){
             .post(API_URL+'/auth/login', credentials)
             .then(res => {
                 if(res.status===200){
-                    localStorage.setItem('jwt', res.data.token);
-                    localStorage.setItem('jwt-authenticated', true);
                     dispatch(receiveLogin(res.data));
+                    dispatch(getUserData());
                     history.push('/');
                 }else{
                     dispatch(errorLogin(res.data.error));
@@ -104,9 +106,6 @@ export function logoutUser(){
         dispatch(requestLogout())
 
         try {
-            localStorage.removeItem('jwt');
-            localStorage.removeItem('jwt-authenticated');
-            
             dispatch(receiveLogout());
             history.push('/');
         }
@@ -131,6 +130,49 @@ export function logoutUser(){
     function errorLogout(err){
         return {
             type: USER_LOGOUT_FAILURE,
+            payload: err
+        }
+    }
+}
+
+export function getUserData(){
+    const token = localStorage.getItem('jwt');
+    return dispatch => {
+        dispatch(requestData(token));
+        
+        axios
+            .post(API_URL+'/auth/authenticate', {token: token})
+            .then(res => {
+                if(res.status===200){
+                    dispatch(receiveData(res.data));
+                    
+                }else{
+                    dispatch(errorData(res.data.error));
+                    return Promise.reject(res.data);
+                }
+            })
+            .catch(err => console.log(err));
+        
+    }
+
+
+    function requestData(token){
+        return {
+            type: USER_DATA_FETCH_REQUEST,
+            payload: token
+        }
+    }
+
+    function receiveData(user){
+        return {
+            type: USER_DATA_FETCH_SUCCESS,
+            payload: user
+        }
+    }
+
+    function errorData(err){
+        return {
+            type: USER_DATA_FETCH_FAILURE,
             payload: err
         }
     }
