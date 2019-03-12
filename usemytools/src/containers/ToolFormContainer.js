@@ -1,10 +1,10 @@
 import React from 'react';
 import ToolForm from '../components/ToolForm';
 
-export default () => {
+export default (props) => {
     return (
         <>
-            <ToolForm newTool={true} />
+            <ToolForm newTool={props.newTool} toolID={props.toolID} />
         </>
     );
 }

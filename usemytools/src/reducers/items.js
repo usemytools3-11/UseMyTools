@@ -89,7 +89,11 @@ export default (state = initialState, action) => {
         case ITEM_UPDATE_SUCCESS:
             return {
                 ...state,
-                tools: [...state.tools, action.payload]
+                tools: [...state.tools.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             }
             
         case ITEM_UPDATE_FAILURE:

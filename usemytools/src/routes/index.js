@@ -6,6 +6,7 @@ import LoginPage from '../pages/LoginPage';
 import ToolsPage from '../pages/ToolsPage';
 import ToolPage from '../pages/ToolPage';
 import NewToolPage from '../pages/NewToolPage';
+import EditToolPage from '../pages/EditToolPage';
 import ProfilePage from '../pages/ProfilePage';
 import RegistrationPage from '../pages/RegistrationPage';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
@@ -34,6 +35,7 @@ const Routes = (props) => {
                 <Route path="/tools" exact component={RouteAuthNeeded(ToolsPage)}/>
                 <Route path="/tools/new" exact component={RouteAuthNeeded(NewToolPage)}/>
                 <Route path="/tools/:id" exact component={RouteAuthNeeded(ToolPage)}/>
+                <Route path="/tools/:id/edit" exact component={RouteAuthNeeded(EditToolPage)}/>
                 <Route path="/profile" exact component={RouteAuthNeeded(ProfilePage)}/>
             </Switch>
             </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ToolContainer from '../containers/ToolContainer';
 import { connect } from 'react-redux';
 import { fetchTool, getUserData, deleteTool } from '../actions';
+import { history } from '../';
 
 class ToolPage extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class ToolPage extends Component {
 
     editTool(e) {
         e.preventDefault();
-        console.log("EDIT ITEM");
+        history.push(`/tools/${this.props.tool.id}/edit`);
     }
 
     deleteTool(e) {

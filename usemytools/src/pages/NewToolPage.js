@@ -5,7 +5,7 @@ export default () => {
     return (
         <>
             <h1>New Tool</h1>
-            <ToolFormContainer />
+            <ToolFormContainer newTool={true} />
         </>
     );
 }

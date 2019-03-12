@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserData, addNewTool, updateTool } from '../actions';
+import { getUserData, fetchTool, addNewTool, updateTool } from '../actions';
+import { history } from '../';
 
 class ToolForm extends Component {
     constructor(props) {
@@ -17,6 +18,15 @@ class ToolForm extends Component {
 
     componentDidMount() {
         this.props.getUserData();
+        if(this.props.newTool === false){
+            this.props.fetchTool(this.props.toolID).then(_ => {
+                this.props.tool.lender_id !== this.props.userID
+                ? history.push('/tools')
+                : this.setState({
+                    name: this.props.tool.name
+                });
+            });
+        }
     }
 
     handleChange(e) {
@@ -36,13 +46,17 @@ class ToolForm extends Component {
 
     updateTool(e){
         e.preventDefault();
-        console.log("UPDATE", this.state);
+        this.props.updateTool({
+            id: this.props.toolID,
+            name: this.state.name,
+            lender_id: this.props.userID
+        });
     }
 
     render() {
         return (
             <>
-                <form onSubmit={this.props.newTool ? this.addNewTool : this.UNSAFE_componentWillMount.updateTool}>
+                <form onSubmit={this.props.newTool ? this.addNewTool : this.updateTool}>
                     <input
                         type="text"
                         name="name"
@@ -63,14 +77,16 @@ class ToolForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        userID: state.auth.user ? state.auth.user.id : -1
+        userID: state.auth.user ? state.auth.user.id : -1,
+        tool: state.items.tool || null
     }
 }
 
 const mapDispatchToProps = {
     getUserData,
     addNewTool,
-    updateTool
+    updateTool,
+    fetchTool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToolForm);

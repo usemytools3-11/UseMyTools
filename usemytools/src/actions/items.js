@@ -64,7 +64,7 @@ export function fetchTool(id){
     return dispatch => {
         dispatch(requestFetch());
         
-        axios
+        return axios
             .get(API_URL+`/tools/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
@@ -148,11 +148,11 @@ export function updateTool(tool){
         dispatch(requestUpdateTool());
         
         axios
-            .get(API_URL+`/tools/${tool.id}`, tool, {headers: {authorization: localStorage.getItem('jwt')}})
+            .put(API_URL+`/tools/${tool.id}`, tool, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveUpdateTool(res.data));
-                    history.push(`/tools/${res.data.id}`);
+                    history.push(`/tools/${tool.id}`);
                 }else{
                     dispatch(errorUpdateTool(res.data.error));
                     return Promise.reject(res.data);
