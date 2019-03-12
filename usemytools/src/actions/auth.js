@@ -136,12 +136,11 @@ export function logoutUser(){
 }
 
 export function getUserData(){
-    const token = localStorage.getItem('jwt');
     return dispatch => {
-        dispatch(requestData(token));
+        dispatch(requestData(localStorage.getItem('jwt')));
         
         axios
-            .post(API_URL+'/auth/authenticate', {token: token})
+            .get(API_URL+'/auth/authenticate', {headers: {token: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveData(res.data));
