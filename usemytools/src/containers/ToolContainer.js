@@ -13,6 +13,9 @@ const ToolContainer = (props) => {
                 lender_id={props.tool.lender_id}
                 editTool={props.editTool}
                 deleteTool={props.deleteTool}
+                borrowTool={props.borrowTool}
+                deleteToolBorrowing={props.deleteToolBorrowing}
+                is_borrowed={props.tool.is_borrowed}
                 singleTool={true}
             />
         </>

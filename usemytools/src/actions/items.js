@@ -14,7 +14,13 @@ import {
     ITEM_UPDATE_FAILURE,
     ITEM_DELETE_REQUEST,
     ITEM_DELETE_SUCCESS,
-    ITEM_DELETE_FAILURE
+    ITEM_DELETE_FAILURE,
+    ITEM_BORROW_REQUEST,
+    ITEM_BORROW_SUCCESS,
+    ITEM_BORROW_FAILURE,
+    ITEM_BORROW_DELETE_REQUEST,
+    ITEM_BORROW_DELETE_SUCCESS,
+    ITEM_BORROW_DELETE_FAILURE
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
@@ -99,7 +105,7 @@ export function fetchTool(id){
         }
     }
 }
-////////////
+
 export function addNewTool(tool){
     return dispatch => {
         dispatch(requestAddNewTool());
@@ -140,8 +146,6 @@ export function addNewTool(tool){
         }
     }
 }
-
-////////
 
 export function updateTool(tool){
     return dispatch => {
@@ -220,6 +224,88 @@ export function deleteTool(id){
     function errorDeleteTool(err){
         return {
             type: ITEM_DELETE_FAILURE,
+            payload: err
+        }
+    }
+}
+
+export function borrowTool(borrowData){
+    return dispatch => {
+        dispatch(requestBorrowTool());
+        
+        axios
+            .post(API_URL+'/lent-tools/', borrowData, {headers: {authorization: localStorage.getItem('jwt')}})
+            .then(res => {
+                if(res.status===200){
+                    dispatch(receiveBorrowTool(res.data));
+                    history.push('/profile/');
+                }else{
+                    dispatch(errorBorrowTool(res.data.error));
+                    return Promise.reject(res.data);
+                }
+            })
+            .catch(err => console.log(err));
+        
+    }
+
+
+    function requestBorrowTool(){
+        return {
+            type: ITEM_BORROW_REQUEST
+        }
+    }
+
+    function receiveBorrowTool(item){
+        return {
+            type: ITEM_BORROW_SUCCESS,
+            payload: item
+        }
+    }
+
+    function errorBorrowTool(err){
+        return {
+            type: ITEM_BORROW_FAILURE,
+            payload: err
+        }
+    }
+}
+
+export function deleteToolBorrowing(id){
+    return dispatch => {
+        dispatch(requestBorrowDeleteTool());
+        
+        axios
+            .delete(API_URL+`/lent-tools/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
+            .then(res => {
+                if(res.status===200){
+                    dispatch(receiveBorrowDeleteTool(res.data));
+                    history.push('/profile/');
+                }else{
+                    dispatch(errorBorrowDeleteTool(res.data.error));
+                    return Promise.reject(res.data);
+                }
+            })
+            .catch(err => console.log(err));
+        
+    }
+
+
+    function requestBorrowDeleteTool(){
+        return {
+            type: ITEM_BORROW_DELETE_REQUEST
+        }
+    }
+
+    function receiveBorrowDeleteTool(item){
+        return {
+            type: ITEM_BORROW_DELETE_SUCCESS,
+            payload: item
+        }
+    }
+
+    function errorBorrowDeleteTool(err){
+        return {
+            type: ITEM_BORROW_DELETE_FAILURE,
             payload: err
         }
     }

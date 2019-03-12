@@ -18,7 +18,7 @@ class ToolsPage extends Component {
         return (
             <>
                 <h1>Your Tools page</h1>
-                <Link to="/tools/new">Add new tool</Link>
+                <Link to="/profile/tools/new">Add new tool</Link>
 
                 <br/>
                 <h1>Available</h1>

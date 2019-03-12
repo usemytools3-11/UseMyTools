@@ -26,6 +26,7 @@ class ToolsPage extends Component {
                 {this.props.tools.filter(elem => elem.lender_id === this.props.userID).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
 
                 <h1>Items you borrowed:</h1>
+                {this.props.tools.filter(elem => elem.is_borrowed).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
             </>
         );
     }
