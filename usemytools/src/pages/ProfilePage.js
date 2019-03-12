@@ -31,7 +31,7 @@ const mapStateToProps = state => {
         last_name: state.auth.user ? state.auth.user.last_name : '',
         email: state.auth.user ? state.auth.user.email : '',
         userID: state.auth.user ? state.auth.user.id : -1,
-        tools: state.items.tools ? state.items.tools.filter(elem => elem.id === state.auth.user.id) : []
+        tools: state.items.tools ? state.items.tools.filter(elem => elem.owner_id === state.auth.user.id) : []
     }
 }
 
