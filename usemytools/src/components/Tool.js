@@ -13,6 +13,10 @@ const Tool = (props) => {
                 <button onClick={props.editTool}>EDIT</button>
                 <button onClick={props.deleteTool}>DELETE</button>
             </>}
+            {props.singleTool && props.lender_id !== props.userID &&
+            <>
+                <button>BORROW</button>
+            </>}
         </>
     );
 }
