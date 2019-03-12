@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import ToolsPage from '../pages/ToolsPage';
+import ProfilePage from '../pages/ProfilePage';
 import RegistrationPage from '../pages/RegistrationPage';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
 import RouteAuthNotNeeded from '../hoc/RouteAuthNotNeeded';
@@ -15,18 +16,21 @@ const Routes = (props) => {
         <>
         <Router history={props.history}>
             <div>
-            <Link to="/">HOME</Link>
             {!props.authenticated &&
-            <><Link to="/login">LOGIN</Link>
+            <><Link to="/">HOME</Link>
+            <Link to="/login">LOGIN</Link>
             <Link to="/register">REGISTER</Link>
             </>}
-            {props.authenticated && <Link to="/tools">TOOLS</Link>}
-            {props.authenticated && <button onClick={props.logoutUser}>LOGOUT</button>}
+            {props.authenticated &&
+            <><Link to="/tools">TOOLS</Link>
+            <Link to="/profile">PROFILE</Link>
+            <button onClick={props.logoutUser}>LOGOUT</button></>}
             <Switch>
                 <Route path="/" exact component={RouteAuthNotNeeded(HomePage)}/>
                 <Route path="/login" exact component={RouteAuthNotNeeded(LoginPage)}/>
                 <Route path="/register" exact component={RouteAuthNotNeeded(RegistrationPage)}/>
                 <Route path="/tools" exact component={RouteAuthNeeded(ToolsPage)}/>
+                <Route path="/profile" exact component={RouteAuthNeeded(ProfilePage)}/>
             </Switch>
             </div>
         </Router>
