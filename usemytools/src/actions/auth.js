@@ -21,9 +21,9 @@ export function registerUser(credentials){
         axios
             .post(API_URL+'/auth/register', credentials)
             .then(res => {
-                if(res.status===200){
+                if(res.status===200 || res.status===201){
                     dispatch(receiveRegistration(res.data));
-                    dispatch(loginUser({email: res.data.email, password: res.data.password}));
+                    dispatch(loginUser({email: credentials.email, password: credentials.password}));
                 }else{
                     dispatch(errorRegistration(res.data.error));
                     return Promise.reject(res.data);
@@ -64,6 +64,7 @@ export function loginUser(credentials){
             .then(res => {
                 if(res.status===200){
                     localStorage.setItem('jwt', res.data.token);
+                    localStorage.setItem('jwt-authenticated', true);
                     dispatch(receiveLogin(res.data));
                     history.push('/');
                 }else{
@@ -86,7 +87,7 @@ export function loginUser(credentials){
     function receiveLogin(user){
         return {
             type: USER_LOGIN_SUCCESS,
-            payload: user.user_token
+            payload: user
         }
     }
 
@@ -104,6 +105,7 @@ export function logoutUser(){
 
         try {
             localStorage.removeItem('jwt');
+            localStorage.removeItem('jwt-authenticated');
             
             dispatch(receiveLogout());
             history.push('/');

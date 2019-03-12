@@ -13,10 +13,11 @@ import {
 
 
 const initialState = {
-    authenticated: false,
+    authenticated: localStorage.getItem('jwt-authenticated') || false,
     isFetching: false,
     error: null,
-    token: null
+    token: null,
+    user: null
 }
 
 export default (state = initialState, action) => {
@@ -31,7 +32,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                authenticated: true
+                authenticated: true,
+                token: action.payload.token,
+                user: action.payload
             }
 
         case USER_LOGIN_FAILURE:
