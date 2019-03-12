@@ -11,6 +11,9 @@ const ToolContainer = (props) => {
                 photo_url={props.tool.photo_url}
                 price={props.tool.price}
                 lender_id={props.tool.lender_id}
+                editTool={props.editTool}
+                deleteTool={props.deleteTool}
+                singleTool={true}
             />
         </>
     );

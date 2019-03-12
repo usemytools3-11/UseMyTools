@@ -11,7 +11,10 @@ import {
     ITEM_ADD_FAILURE,
     ITEM_UPDATE_REQUEST,
     ITEM_UPDATE_SUCCESS,
-    ITEM_UPDATE_FAILURE
+    ITEM_UPDATE_FAILURE,
+    ITEM_DELETE_REQUEST,
+    ITEM_DELETE_SUCCESS,
+    ITEM_DELETE_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -84,13 +87,29 @@ export default (state = initialState, action) => {
             }
 
         case ITEM_UPDATE_SUCCESS:
-        console.log(action.payload);
             return {
                 ...state,
                 tools: [...state.tools, action.payload]
             }
             
         case ITEM_UPDATE_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+        
+        case ITEM_DELETE_REQUEST:
+            return {
+                ...state
+            }
+
+        case ITEM_DELETE_SUCCESS:
+            return {
+                ...state,
+                tools: state.tools.filter(elem => elem.id !== action.payload)
+            }
+            
+        case ITEM_DELETE_FAILURE:
             return {
                 ...state,
                 error: action.payload

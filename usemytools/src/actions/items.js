@@ -12,9 +12,13 @@ import {
     ITEM_UPDATE_REQUEST,
     ITEM_UPDATE_SUCCESS,
     ITEM_UPDATE_FAILURE,
+    ITEM_DELETE_REQUEST,
+    ITEM_DELETE_SUCCESS,
+    ITEM_DELETE_FAILURE
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
+import { history } from '../';
 
 export function fetchTools(){
     return dispatch => {
@@ -105,6 +109,7 @@ export function addNewTool(tool){
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveAddNewTool(res.data));
+                    history.push(`/tools/${res.data.id}`);
                 }else{
                     dispatch(errorAddNewTool(res.data.error));
                     return Promise.reject(res.data);
@@ -147,6 +152,7 @@ export function updateTool(tool){
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveUpdateTool(res.data));
+                    history.push(`/tools/${res.data.id}`);
                 }else{
                     dispatch(errorUpdateTool(res.data.error));
                     return Promise.reject(res.data);
@@ -173,6 +179,47 @@ export function updateTool(tool){
     function errorUpdateTool(err){
         return {
             type: ITEM_UPDATE_FAILURE,
+            payload: err
+        }
+    }
+}
+
+export function deleteTool(id){
+    return dispatch => {
+        dispatch(requestDeleteTool());
+        
+        axios
+            .delete(API_URL+`/tools/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
+            .then(res => {
+                if(res.status===200){
+                    dispatch(receiveDeleteTool(res.data));
+                    history.push('/tools');
+                }else{
+                    dispatch(errorDeleteTool(res.data.error));
+                    return Promise.reject(res.data);
+                }
+            })
+            .catch(err => console.log(err));
+        
+    }
+
+
+    function requestDeleteTool(){
+        return {
+            type: ITEM_DELETE_REQUEST
+        }
+    }
+
+    function receiveDeleteTool(item){
+        return {
+            type: ITEM_DELETE_SUCCESS,
+            payload: item.id
+        }
+    }
+
+    function errorDeleteTool(err){
+        return {
+            type: ITEM_DELETE_FAILURE,
             payload: err
         }
     }

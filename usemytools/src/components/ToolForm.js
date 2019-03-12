@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserData, addNewTool, updateTool } from '../actions';
-import { history } from '../';
 
 class ToolForm extends Component {
     constructor(props) {
@@ -17,9 +16,7 @@ class ToolForm extends Component {
     }
 
     componentDidMount() {
-        if(this.props.userID === -1){
-            this.props.getUserData();
-        }
+        this.props.getUserData();
     }
 
     handleChange(e) {
@@ -35,8 +32,6 @@ class ToolForm extends Component {
             name: this.state.name,
             lender_id: this.props.userID
         });
-
-        history.push('/tools');
     }
 
     updateTool(e){
