@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Tools from '../containers/ToolsContainer';
 import { connect } from 'react-redux';
 import { fetchTools, getUserData } from '../actions';
+import { Link } from 'react-router-dom';
 
 class ToolsPage extends Component {
     componentDidMount() {
         if(this.props.tools.length === 0){
             this.props.fetchTools();
         }
-
         if(this.props.userID === -1){
             this.props.getUserData();
         }
@@ -17,8 +17,9 @@ class ToolsPage extends Component {
     render() {
         return (
             <>
-                <h1>Tools page</h1>
-                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id !== this.props.userID)} />}
+                <h1>Your Tools page</h1>
+                <Link to="/tools/new">Add new tool</Link>
+                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID)} />}
             </>
         );
     }

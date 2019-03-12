@@ -20,6 +20,8 @@ class ToolsPage extends Component {
                 <h2>{this.props.first_name} {this.props.last_name}</h2>
                 <p>{this.props.email}</p>
 
+                <Link to="/profile/tools">Your tools</Link>
+
                 <h1>Your items:</h1>
                 {this.props.tools.filter(elem => elem.lender_id === this.props.userID).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
 
