@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                tools: action.payload
+                tools: action.payload.tools
             }
 
         case ITEMS_FETCH_FAILURE:

@@ -15,7 +15,7 @@ export function fetchTools(){
         dispatch(requestFetch());
         
         axios
-            .get(API_URL+'/tools/', {headers: {token: localStorage.getItem('jwt')}})
+            .get(API_URL+'/tools/', {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveFetch(res.data));
@@ -55,7 +55,7 @@ export function fetchTool(id){
         dispatch(requestFetch());
         
         axios
-            .get(API_URL+`/tools/${id}`, {headers: {token: localStorage.getItem('jwt')}})
+            .get(API_URL+`/tools/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
                     dispatch(receiveFetch(res.data));
