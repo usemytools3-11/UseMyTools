@@ -5,7 +5,13 @@ import {
     ITEMS_FETCH_FAILURE,
     ITEM_FETCH_REQUEST,
     ITEM_FETCH_SUCCESS,
-    ITEM_FETCH_FAILURE
+    ITEM_FETCH_FAILURE,
+    ITEM_ADD_REQUEST,
+    ITEM_ADD_SUCCESS,
+    ITEM_ADD_FAILURE,
+    ITEM_UPDATE_REQUEST,
+    ITEM_UPDATE_SUCCESS,
+    ITEM_UPDATE_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -53,6 +59,41 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false
+            }
+
+        case ITEM_ADD_REQUEST:
+            return {
+                ...state
+            }
+
+        case ITEM_ADD_SUCCESS:
+            return {
+                ...state,
+                tools: [...state.tools, action.payload]
+            }
+
+        case ITEM_ADD_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+        
+        case ITEM_UPDATE_REQUEST:
+            return {
+                ...state
+            }
+
+        case ITEM_UPDATE_SUCCESS:
+        console.log(action.payload);
+            return {
+                ...state,
+                tools: [...state.tools, action.payload]
+            }
+            
+        case ITEM_UPDATE_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             }
 
         default:

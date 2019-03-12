@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Tools from '../containers/ToolsContainer';
 import { connect } from 'react-redux';
 import { fetchTools } from '../actions';
+import { Link } from 'react-router-dom';
 
 class ToolsPage extends Component {
     componentDidMount() {
@@ -14,6 +15,7 @@ class ToolsPage extends Component {
         return (
             <>
                 <h1>Tools page</h1>
+                <Link to="/tools/new">Add new tool</Link>
                 {this.props.authenticated && <Tools tools={this.props.tools} />}
             </>
         );
