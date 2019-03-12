@@ -12,7 +12,7 @@ const ToolsContainer = (props) => {
                 name={tool.name}
                 photo_url={tool.photo_url}
                 price={tool.price}
-                lender_id={tool.owner_id}
+                lender_id={tool.lender_id}
             /></Link>)}
         </>
     );
