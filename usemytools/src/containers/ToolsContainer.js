@@ -14,6 +14,11 @@ const ToolsContainer = (props) => {
                     photo_url={tool.photo_url}
                     price={tool.price}
                     lender_id={tool.lender_id}
+                    lender_data={
+                        props.users.find(elem => elem.id === tool.lender_id) !== undefined
+                        ? props.users.find(elem => elem.id === tool.lender_id)
+                        : {first_name: '', last_name: ''}
+                    }
                 />
             </Link>)}
         </>

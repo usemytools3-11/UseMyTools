@@ -5,8 +5,8 @@ import { getUserData } from '../actions';
 const Tool = (props) => {
     return (
         <>
-            <h1>{props.name} by {props.lender_id}</h1>
-            <img src={props.photo_url} alt={props.name} />
+            <h1>{props.name} by {props.lender_data.first_name} {props.lender_data.last_name}</h1>
+            <img src={props.photo_url} alt={props.name} style={{width: 150+'px', height: 150+'px'}} />
             <p>{props.price}</p>
             {props.singleTool && props.lender_id === props.userID && 
             <>

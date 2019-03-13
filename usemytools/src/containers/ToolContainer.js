@@ -19,6 +19,11 @@ const ToolContainer = (props) => {
                 borrowerID={props.borrowerID.borrower_id}
                 userID={props.userID}
                 singleTool={true}
+                lender_data={
+                    props.users.find(elem => elem.id === props.tool.lender_id) !== undefined
+                    ? props.users.find(elem => elem.id === props.tool.lender_id)
+                    : {first_name: '', last_name: ''}
+                }
             />
         </>
     );
