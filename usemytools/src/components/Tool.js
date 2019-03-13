@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 
 const Tool = (props) => {
-    // console.log(props.lender_id, props.userID);
     return (
         <>
             <h1>{props.name} by {props.lender_id}</h1>
@@ -19,7 +18,7 @@ const Tool = (props) => {
                 {!props.is_borrowed &&
                     <button onClick={props.borrowTool}>BORROW</button>
                 }
-                {props.is_borrowed && <button onClick={props.deleteToolBorrowing}>DELETE BORROWING</button>}
+                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing}>DELETE BORROWING</button>}
             </>}
         </>
     );

@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { getUserData, fetchTools, borrowFetch } from '../actions';
 import { Link } from 'react-router-dom';
 
-class ToolsPage extends Component {
+class ProfilePage extends Component {
     componentDidMount() {
-        if(this.props.first_name.length === 0 || this.props.last_name.length === 0 || this.props.email.length === 0){
-            this.props.getUserData();
-        }
+        this.props.getUserData();
         this.props.fetchTools();
 
         this.props.borrowFetch();
@@ -20,7 +18,7 @@ class ToolsPage extends Component {
                 <h1>Profile page</h1>
                 <h2>{this.props.first_name} {this.props.last_name}</h2>
                 <p>{this.props.email}</p>
-
+                <Link to="/profile/edit">Edit profile</Link>
                 <Link to="/profile/tools">Your tools</Link>
 
                 <h1>Your items:</h1>
@@ -50,4 +48,4 @@ const mapDispatchToProps = {
     borrowFetch
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ToolsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

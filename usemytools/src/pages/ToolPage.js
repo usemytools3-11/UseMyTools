@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ToolContainer from '../containers/ToolContainer';
 import { connect } from 'react-redux';
-import { fetchTool, getUserData, deleteTool, borrowTool, deleteToolBorrowing } from '../actions';
+import { fetchTool, getUserData, deleteTool, borrowTool, deleteToolBorrowing, borrowFetch } from '../actions';
 import { history } from '../';
 
 class ToolPage extends Component {
@@ -15,6 +15,7 @@ class ToolPage extends Component {
     }
     componentDidMount() {
         this.props.fetchTool(this.props.match.params.id);
+        this.props.borrowFetch();
         if(this.props.userID === -1){
             this.props.getUserData();
         }
@@ -47,7 +48,7 @@ class ToolPage extends Component {
         return (
             <>
                 <h1 style={{color: "red"}}>Tool page</h1>
-                {this.props.tool && <ToolContainer userID={this.props.userID} tool={this.props.tool} editTool={this.editTool} deleteTool={this.deleteTool} borrowTool={this.borrowTool} deleteToolBorrowing={this.deleteToolBorrowing} />}
+                {this.props.tool && <ToolContainer userID={this.props.userID} tool={this.props.tool} borrowerID={this.props.borrowerID} editTool={this.editTool} deleteTool={this.deleteTool} borrowTool={this.borrowTool} deleteToolBorrowing={this.deleteToolBorrowing} />}
             </>
         );
     }
@@ -58,6 +59,7 @@ const mapStateToProps = state => {
         authenticated: state.auth.authenticated || false,
         tool: state.items.tool || null,
         userID: state.auth.user ? state.auth.user.id : -1,
+        borrowerID: (state.items.tool && state.items.borrowed) ? state.items.borrowed.find(elem => elem.tool_id === state.items.tool.id) : {borrower_id: -1}
     }
 }
 
@@ -66,7 +68,8 @@ const mapDispatchToProps = {
     getUserData,
     deleteTool,
     borrowTool,
-    deleteToolBorrowing
+    deleteToolBorrowing,
+    borrowFetch
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToolPage);

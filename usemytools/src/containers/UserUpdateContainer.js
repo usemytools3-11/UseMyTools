@@ -4,7 +4,7 @@ import UserForm from '../components/UserForm';
 export default () => {
     return (
         <>
-            <UserForm registerForm={true} loginForm={false} updateForm={false} />
+            <UserForm registerForm={false} loginForm={false} updateForm={true} />
         </>
     );
 }

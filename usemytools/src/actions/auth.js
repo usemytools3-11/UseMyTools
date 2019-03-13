@@ -139,7 +139,7 @@ export function getUserData(){
     return dispatch => {
         dispatch(requestData(localStorage.getItem('jwt')));
         
-        axios
+        return axios
             .get(API_URL+'/auth/authorization', {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){

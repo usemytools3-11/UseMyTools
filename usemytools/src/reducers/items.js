@@ -46,7 +46,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                tools: action.payload.tools
+                tools: action.payload.tools.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             }
 
         case ITEMS_FETCH_FAILURE:
