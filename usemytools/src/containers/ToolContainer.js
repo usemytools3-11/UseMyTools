@@ -2,7 +2,6 @@ import React from 'react';
 import Tool from '../components/Tool';
 
 const ToolContainer = (props) => {
-    console.log(props.borrowerID);
     return (
         <>
             <Tool
@@ -17,7 +16,7 @@ const ToolContainer = (props) => {
                 borrowTool={props.borrowTool}
                 deleteToolBorrowing={props.deleteToolBorrowing}
                 is_borrowed={props.tool.is_borrowed}
-                borrowerID={props.borrowerID}
+                borrowerID={props.borrowerID.borrower_id}
                 userID={props.userID}
                 singleTool={true}
             />
