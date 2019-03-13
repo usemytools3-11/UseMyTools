@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 
 const Tool = (props) => {
+    // console.log(props.lender_id, props.userID);
     return (
         <>
             <h1>{props.name} by {props.lender_id}</h1>
@@ -24,7 +25,7 @@ const Tool = (props) => {
 
 const mapStateToProps = state => {
     return {
-        userID: 1
+        
     }
 }
 

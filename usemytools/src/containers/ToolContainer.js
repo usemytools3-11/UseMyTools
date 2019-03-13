@@ -16,6 +16,7 @@ const ToolContainer = (props) => {
                 borrowTool={props.borrowTool}
                 deleteToolBorrowing={props.deleteToolBorrowing}
                 is_borrowed={props.tool.is_borrowed}
+                userID={props.userID}
                 singleTool={true}
             />
         </>

@@ -47,7 +47,7 @@ class ToolPage extends Component {
         return (
             <>
                 <h1 style={{color: "red"}}>Tool page</h1>
-                {this.props.tool && <ToolContainer tool={this.props.tool} editTool={this.editTool} deleteTool={this.deleteTool} borrowTool={this.borrowTool} deleteToolBorrowing={this.deleteToolBorrowing} />}
+                {this.props.tool && <ToolContainer userID={this.props.userID} tool={this.props.tool} editTool={this.editTool} deleteTool={this.deleteTool} borrowTool={this.borrowTool} deleteToolBorrowing={this.deleteToolBorrowing} />}
             </>
         );
     }

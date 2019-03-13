@@ -18,7 +18,7 @@ class ToolsPage extends Component {
         return (
             <>
                 <h1>Tools available</h1>
-                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id !== this.props.userID).filter(elem => !elem.is_borrowed)} />}
+                {this.props.authenticated && <Tools userID={this.props.userID} tools={this.props.tools.filter(elem => elem.lender_id !== this.props.userID).filter(elem => !elem.is_borrowed)} />}
             </>
         );
     }

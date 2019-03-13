@@ -9,6 +9,7 @@ class ToolForm extends Component {
 
         this.state = {
             name: '',
+            price: '',
             photo_url: ''
         };
         this.handleChange = this.handleChange.bind(this);
@@ -23,7 +24,9 @@ class ToolForm extends Component {
                 this.props.tool.lender_id !== this.props.userID
                 ? history.push('/tools')
                 : this.setState({
-                    name: this.props.tool.name
+                    name: this.props.tool.name,
+                    price: this.props.tool.price,
+                    photo_url: this.props.tool.photo_url
                 });
             });
         }
@@ -40,6 +43,8 @@ class ToolForm extends Component {
         e.preventDefault();
         this.props.addNewTool({
             name: this.state.name,
+            price: this.state.price,
+            photo_url: this.state.photo_url,
             lender_id: this.props.userID
         });
     }
@@ -49,6 +54,8 @@ class ToolForm extends Component {
         this.props.updateTool({
             id: this.props.toolID,
             name: this.state.name,
+            price: this.state.price,
+            photo_url: this.state.photo_url,
             lender_id: this.props.userID
         });
     }
@@ -63,6 +70,22 @@ class ToolForm extends Component {
                         placeholder="Your tool name"
                         onChange={this.handleChange}
                         value={this.state.name}
+                    />
+
+                    <input
+                        type="text"
+                        name="price"
+                        placeholder="Your tool lent price"
+                        onChange={this.handleChange}
+                        value={this.state.price}
+                    />
+
+                    <input
+                        type="text"
+                        name="photo_url"
+                        placeholder="Your tool photo url"
+                        onChange={this.handleChange}
+                        value={this.state.photo_url}
                     />
 
                     <input

@@ -6,14 +6,16 @@ const ToolsContainer = (props) => {
     return (
         <>
             {props.tools.map(tool => 
-            <Link to={`/tools/${tool.id}`} key={tool.id}><Tool
-                key={tool.id}
-                id={tool.id}
-                name={tool.name}
-                photo_url={tool.photo_url}
-                price={tool.price}
-                lender_id={tool.lender_id}
-            /></Link>)}
+            <Link to={`/tools/${tool.id}`} key={tool.id}>
+                <Tool
+                    key={tool.id}
+                    id={tool.id}
+                    name={tool.name}
+                    photo_url={tool.photo_url}
+                    price={tool.price}
+                    lender_id={tool.lender_id}
+                />
+            </Link>)}
         </>
     );
 }

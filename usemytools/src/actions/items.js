@@ -41,7 +41,6 @@ export function fetchTools(){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -81,7 +80,6 @@ export function fetchTool(id){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -113,16 +111,16 @@ export function addNewTool(tool){
         axios
             .post(API_URL+'/tools/', tool, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
-                if(res.status===200){
-                    dispatch(receiveAddNewTool(res.data));
-                    history.push(`/tools/${res.data.id}`);
+                if(res.status===201){
+                    // console.log(res.data);
+                    dispatch(receiveAddNewTool(res.data.tool));
+                    history.push(`/tools/${res.data.tool.id}`);
                 }else{
                     dispatch(errorAddNewTool(res.data.error));
-                    return Promise.reject(res.data);
+                    return Promise.reject(res.data.tool);
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -152,10 +150,12 @@ export function updateTool(tool){
         dispatch(requestUpdateTool());
         
         axios
-            .put(API_URL+`/tools/${tool.id}`, tool, {headers: {authorization: localStorage.getItem('jwt')}})
+            .put(API_URL+`/tools/${tool.id}`, {...tool}, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
+                console.log(res);
                 if(res.status===200){
-                    dispatch(receiveUpdateTool(res.data));
+                    // to be updated
+                    dispatch(receiveUpdateTool(res.data[0]));
                     history.push(`/tools/${tool.id}`);
                 }else{
                     dispatch(errorUpdateTool(res.data.error));
@@ -163,7 +163,6 @@ export function updateTool(tool){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -204,7 +203,6 @@ export function deleteTool(id){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -236,6 +234,7 @@ export function borrowTool(borrowData){
         axios
             .post(API_URL+'/lent-tools/', borrowData, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
+                console.log(res.data);
                 if(res.status===200){
                     dispatch(receiveBorrowTool(res.data));
                     history.push('/profile/');
@@ -245,7 +244,6 @@ export function borrowTool(borrowData){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
@@ -255,10 +253,10 @@ export function borrowTool(borrowData){
         }
     }
 
-    function receiveBorrowTool(item){
+    function receiveBorrowTool(order){
         return {
             type: ITEM_BORROW_SUCCESS,
-            payload: item
+            payload: order
         }
     }
 
@@ -286,7 +284,6 @@ export function deleteToolBorrowing(id){
                 }
             })
             .catch(err => console.log(err));
-        
     }
 
 
