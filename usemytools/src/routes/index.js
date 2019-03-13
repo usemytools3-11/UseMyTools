@@ -30,6 +30,7 @@ const Routes = (props) => {
                     <Route path="/profile" exact component={RouteAuthNeeded(ProfilePage)}/>
                     <Route path="/profile/edit" exact component={RouteAuthNeeded(EditUserPage)}/>
                     <Route path="/profile/tools" exact component={RouteAuthNeeded(YourToolsPage)}/>
+                    <Route path="/profile/:id" exact component={RouteAuthNeeded(ProfilePage)}/>
                 </Switch>
             </div>
         </Router>
