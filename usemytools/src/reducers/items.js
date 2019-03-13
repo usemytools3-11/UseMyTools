@@ -18,6 +18,9 @@ import {
     ITEM_BORROW_REQUEST,
     ITEM_BORROW_SUCCESS,
     ITEM_BORROW_FAILURE,
+    ITEM_BORROW_FETCH_REQUEST,
+    ITEM_BORROW_FETCH_SUCCESS,
+    ITEM_BORROW_FETCH_FAILURE,
     ITEM_BORROW_DELETE_REQUEST,
     ITEM_BORROW_DELETE_SUCCESS,
     ITEM_BORROW_DELETE_FAILURE
@@ -125,6 +128,23 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.payload
             }
+
+        case ITEM_BORROW_FETCH_REQUEST:
+            return {
+                ...state
+            }
+
+        case ITEM_BORROW_FETCH_SUCCESS:
+            return {
+                ...state,
+                borrowed: action.payload
+            }
+            
+        case ITEM_BORROW_FETCH_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
         
         case ITEM_BORROW_REQUEST:
             return {
@@ -134,11 +154,6 @@ export default (state = initialState, action) => {
         case ITEM_BORROW_SUCCESS:
             return {
                 ...state,
-                tools: [...state.tools.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
-                    if (a.id < b.id) return -1;
-                    if (a.id > b.id) return 1;
-                    return 0;
-                }),
                 borrowed: [...state.borrowed, action.payload]
             }
             
@@ -156,7 +171,7 @@ export default (state = initialState, action) => {
         case ITEM_BORROW_DELETE_SUCCESS:
             return {
                 ...state,
-                borrowed: [...state.borrowed.filter(elem => !elem.action.payload)]
+                borrowed: [...state.borrowed.filter(elem => !elem.tool_id === action.payload)]
             }
             
         case ITEM_BORROW_DELETE_FAILURE:

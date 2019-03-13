@@ -13,11 +13,13 @@ const Tool = (props) => {
             <>
                 <button onClick={props.editTool}>EDIT</button>
                 <button onClick={props.deleteTool}>DELETE</button>
-                {props.is_borrowed && <button onClick={props.deleteToolBorrowing}>DELETE BORROWING</button>}
             </>}
-            {props.singleTool && props.lender_id !== props.userID && !props.is_borrowed &&
+            {props.singleTool && props.lender_id !== props.userID &&
             <>
-                <button onClick={props.borrowTool}>BORROW</button>
+                {!props.is_borrowed &&
+                    <button onClick={props.borrowTool}>BORROW</button>
+                }
+                {props.is_borrowed && <button onClick={props.deleteToolBorrowing}>DELETE BORROWING</button>}
             </>}
         </>
     );
