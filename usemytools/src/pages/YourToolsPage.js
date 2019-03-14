@@ -3,6 +3,30 @@ import Tools from '../containers/ToolsContainer';
 import { connect } from 'react-redux';
 import { fetchTools, getUserData, fetchUsers } from '../actions';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+    text-align: center;
+`;
+
+const Label = styled.p`
+    text-align: center;
+`;
+
+const SectionTitle = styled.h2`
+    text-align: center;
+`;
+
+const FWLink = styled(Link)`
+    width: 100%;
+`;
+
+const CenterButtonDiv = styled.div`
+    width: 16rem;
+    max-width: 16rem;
+    min-width: 8rem;
+    margin: 0 auto;
+`;
 
 class ToolsPage extends Component {
     componentDidMount() {
@@ -22,15 +46,19 @@ class ToolsPage extends Component {
     render() {
         return (
             <>
-                <h1>Your Tools page</h1>
-                <Link to="/profile/tools/new">Add new tool</Link>
+                <Title>Your tools</Title>
+                <CenterButtonDiv>
+                    <FWLink to="/profile/tools/new" className="btn btn-primary">Add new tool</FWLink>
+                </CenterButtonDiv>
 
                 <br/>
-                <h1>Available</h1>
-                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
+                <SectionTitle>Available:</SectionTitle>
+                {this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed).length === 0 ? <Label>No items</Label> : 
+                    this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
 
-                <h1>Borrowed</h1>
-                {this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed)} users={this.props.users} />}
+                <SectionTitle>Borrowed:</SectionTitle>
+                {this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed).length === 0 ? <Label>No items</Label> : 
+                    this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed)} users={this.props.users} />}
             </>
         );
     }

@@ -24,11 +24,10 @@ const Image = styled.img`
     height: 100%;
 `;
 
-const Price = styled.p`
+const Price = styled.h3`
     color: black;
     text-decoration: none;
     text-align: center;
-    font-weight: 700;
 `;
 
 const Owner = styled.p`

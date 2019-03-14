@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 import Tools from '../containers/ToolsContainer';
 import { connect } from 'react-redux';
 import { fetchTools, getUserData, fetchUsers } from '../actions';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+    text-align: center;
+`;
+
+const SearchBar = styled.div`
+    width: 24rem;
+    max-width: 24rem;
+    min-width: 8rem;
+    margin: 0 auto;
+`;
+
+const SearchInput = styled.input`
+    width: 100%;
+    padding: 0 2rem;
+
+    &::placeholder {
+        text-align: center;
+    }
+`;
 
 class ToolsPage extends Component {
     constructor(props) {
@@ -41,11 +62,12 @@ class ToolsPage extends Component {
 
     render() {
         const objects = this.returnFilteredObjects();
-        console.log(objects);
         return (
             <>
-                <h1>Tools available</h1>
-                <input type="text" name="search" placeholder="What would you like to borrow today?" onChange={this.handleChange} value={this.state.search} />
+                <Title>Tools available</Title>
+                <SearchBar>
+                    <SearchInput type="text" name="search" placeholder="What would you like to borrow today?" onChange={this.handleChange} value={this.state.search} />
+                </SearchBar>
                 {this.props.authenticated && <Tools userID={this.props.userID} tools={objects.filter(elem => elem.lender_id !== this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
             </>
         );
