@@ -41,6 +41,15 @@ const cardBorder = {
     borderRadius: '6px'
 };
 
+const ButtonHalf = styled.button`
+    width: 50%;
+    display: inline-block;
+`;
+
+const Buttons = styled.div`
+    width: 100%;
+`;
+
 const Tool = (props) => {
     return (
         <Card className="card" style={cardBorder}>
@@ -53,10 +62,10 @@ const Tool = (props) => {
             <Image src={props.photo_url} alt={props.name} />
             <Price>${props.price}</Price>
             {props.singleTool && props.lender_id === props.userID && 
-            <>
-                <button onClick={props.editTool} className="btn btn-primary">EDIT</button>
-                <button onClick={props.deleteTool} className="btn btn-danger">DELETE</button>
-            </>}
+            <Buttons>
+                <ButtonHalf onClick={props.editTool} className="btn btn-primary">EDIT</ButtonHalf>
+                <ButtonHalf onClick={props.deleteTool} className="btn btn-danger">DELETE</ButtonHalf>
+            </Buttons>}
             {props.singleTool && props.lender_id !== props.userID &&
             <>
                 {!props.is_borrowed &&

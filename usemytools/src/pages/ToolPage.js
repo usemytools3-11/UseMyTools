@@ -50,7 +50,6 @@ class ToolPage extends Component {
         if(this.props.borrowerID !== undefined && this.props.borrowerID !== null) bid = this.props.borrowerID;
         return (
             <>
-                <h1 style={{color: "red"}}>Tool page</h1>
                 {this.props.tool && <ToolContainer userID={this.props.userID} tool={this.props.tool} borrowerID={bid} editTool={this.editTool} deleteTool={this.deleteTool} borrowTool={this.borrowTool} deleteToolBorrowing={this.deleteToolBorrowing} users={this.props.users} />}
             </>
         );

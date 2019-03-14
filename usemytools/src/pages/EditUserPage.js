@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 import UserUpdateContainer from '../containers/UserUpdateContainer';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+    text-align: center;
+`;
+
+const UserProperties = styled.div`
+    width: 16rem;
+    margin: 2rem auto;
+`;
+
+const Label = styled.p`
+    margin-top: 2rem;
+`;
+
+const Property = styled.h3`
+    border-bottom: 1px solid black;
+`;
 
 class EditUserPage extends Component {
     componentDidMount() {
@@ -13,9 +31,15 @@ class EditUserPage extends Component {
     render() {
         return (
             <>
-                <h1>Edit user page</h1>
-                <h2>{this.props.first_name} {this.props.last_name}</h2>
-                <p>{this.props.email}</p>
+                <>
+                    <Title>Edit user</Title>
+                    <UserProperties>
+                        <Label>User name:</Label>
+                        <Property>{this.props.first_name} {this.props.last_name}</Property>
+                        <Label>Email:</Label>
+                        <Property>{this.props.email}</Property>
+                    </UserProperties>
+                </>
 
                 <UserUpdateContainer />
             </>

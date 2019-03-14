@@ -13,6 +13,11 @@ const Title = styled.h1`
     text-align: center;
 `;
 
+const cardBorder = {
+    border: '1px solid black',
+    borderRadius: '6px'
+};
+
 class ToolForm extends Component {
     constructor(props) {
         super(props);
@@ -73,7 +78,7 @@ class ToolForm extends Component {
     render() {
         return (
             <>
-                <FormComponent onSubmit={this.props.newTool ? this.addNewTool : this.updateTool} className="card">
+                <FormComponent onSubmit={this.props.newTool ? this.addNewTool : this.updateTool} className="card" style={cardBorder}>
                     <Title>
                         {this.props.newTool && "New tool"}
                         {!this.props.newTool && "Update tool"}
