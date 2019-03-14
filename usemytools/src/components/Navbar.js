@@ -19,7 +19,6 @@ const Navbar = (props) => {
                 <Link to="/profile/tools">YOUR_TOOLS</Link><br/>
                 <Link to="/profile/tools/new">NEW_TOOL</Link><br/>
                 <button onClick={props.logoutUser}>LOGOUT</button>
-                <input type="text" name="search" placeholder="What tool would you like to borrow today?" value={props.search} />
             </>}
         </>
     );
@@ -27,13 +26,12 @@ const Navbar = (props) => {
 
 const mapStateToProps = state => {
     return {
-        authenticated: state.auth.authenticated,
-        search: state.search
+        authenticated: state.auth.authenticated
     }
 }
 
 const mapDispatchToProps = {
-    logoutUser
+    logoutUser,
 }
 
 

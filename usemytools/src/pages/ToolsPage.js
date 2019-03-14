@@ -4,6 +4,16 @@ import { connect } from 'react-redux';
 import { fetchTools, getUserData, fetchUsers } from '../actions';
 
 class ToolsPage extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            search: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.returnFilteredObjects = this.returnFilteredObjects.bind(this);
+    }
     componentDidMount() {
         if(this.props.tools.length === 0){
             this.props.fetchTools();
@@ -18,11 +28,25 @@ class ToolsPage extends Component {
         }
     }
 
+    handleChange(e) {
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    returnFilteredObjects() {
+        return this.state.search.trim().length > 0 ? this.props.tools.filter(elem => elem.name.toLowerCase().includes(this.state.search.toLowerCase())) : this.props.tools;
+    }
+
     render() {
+        const objects = this.returnFilteredObjects();
+        console.log(objects);
         return (
             <>
                 <h1>Tools available</h1>
-                {this.props.authenticated && <Tools userID={this.props.userID} tools={this.props.tools.filter(elem => elem.lender_id !== this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
+                <input type="text" name="search" placeholder="What would you like to borrow today?" onChange={this.handleChange} value={this.state.search} />
+                {this.props.authenticated && <Tools userID={this.props.userID} tools={objects.filter(elem => elem.lender_id !== this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
             </>
         );
     }
