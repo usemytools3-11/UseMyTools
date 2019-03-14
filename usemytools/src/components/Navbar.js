@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
+import { Link } from 'react-router-dom';
 
 import {
     Collapse,
@@ -97,23 +98,23 @@ class NavbarComponent extends Component {
                     <Nav className="ml-auto" navbar>
                         {!this.props.authenticated && navlinksPublic.map((elem, i) =>
                             <NavItem key={i}>
-                                <NavLink href={elem.linkTo}>
+                                <Link to={elem.linkTo} className='nav-link'>
                                     {elem.text}
-                                </NavLink>
+                                </Link>
                             </NavItem>
                         )}
                         {this.props.authenticated && navlinksPrivate.map((elem, i) =>
                             <NavItem key={i}>
-                                <NavLink href={elem.linkTo}>
+                                <Link to={elem.linkTo} className='nav-link'>
                                     {elem.text}
-                                </NavLink>
+                                </Link>
                             </NavItem>
                         )}
                         {this.props.authenticated &&
                             <NavItem>
-                                <NavLink hre='/' onClick={this.props.logoutUser}>
+                                <Link to='/' onClick={this.props.logoutUser} className='nav-link'>
                                     Log out
-                                </NavLink>
+                                </Link>
                             </NavItem>
                         }
                     </Nav>
