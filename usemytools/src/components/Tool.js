@@ -13,6 +13,16 @@ const Card = styled.div`
     }
 `;
 
+const CardSingle = styled.div`
+    width: 45%;
+    margin: 20px auto;
+
+    &:hover {
+        text-decoration: none;
+        box-shadow: 0 0 50px 20px #D1BD88 !important;
+    }
+`
+
 const Title = styled.h1`
     text-align: center;
     color: black;
@@ -49,9 +59,22 @@ const Buttons = styled.div`
     width: 100%;
 `;
 
+const BtnBorrowTool = styled.button`
+    background: #D1bD88 !important;
+    border: none !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+
+    &:hover {
+        background-color: white !important;
+        color: #D1BD88 !important;
+        border: 1px #D1BD88 solid !important;
+    }
+`;
+
 const Tool = (props) => {
     return (
-        <Card className="card" style={cardBorder}>
+        <>
+        {props.singleTool && <Card className="card" style={cardBorder}>
             <Title>{props.name}</Title>
             {props.singleTool &&
                 <Owner>
@@ -68,11 +91,36 @@ const Tool = (props) => {
             {props.singleTool && props.lender_id !== props.userID &&
             <>
                 {!props.is_borrowed &&
-                    <button onClick={props.borrowTool} className="btn btn-success">BORROW TOOL</button>
+                    <BtnBorrowTool onClick={props.borrowTool} className="btn btn-success">BORROW TOOL</BtnBorrowTool>
                 }
                 {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing} className="btn btn-danger">RETURN TOOL</button>}
             </>}
-        </Card>
+        </Card>}
+
+        {!props.singleTool && <CardSingle className="card" style={cardBorder}>
+            <Title>{props.name}</Title>
+            {props.singleTool &&
+                <Owner>
+                    by <Link to={`/profile/${props.lender_id}`}>{props.lender_data.first_name} {props.lender_data.last_name}</Link>
+                </Owner>
+            }
+            <Image src={props.photo_url} alt={props.name} />
+            <Price>${props.price}</Price>
+            {props.singleTool && props.lender_id === props.userID && 
+            <Buttons>
+                <ButtonHalf onClick={props.editTool} className="btn btn-primary">EDIT</ButtonHalf>
+                <ButtonHalf onClick={props.deleteTool} className="btn btn-danger">DELETE</ButtonHalf>
+            </Buttons>}
+            {props.singleTool && props.lender_id !== props.userID &&
+            <>
+                {!props.is_borrowed &&
+                    <BtnBorrowTool onClick={props.borrowTool} className="btn btn-success">BORROW TOOL</BtnBorrowTool>
+                }
+                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing} className="btn btn-danger">RETURN TOOL</button>}
+            </>}
+        </CardSingle>}
+
+        </>
     );
 }
 

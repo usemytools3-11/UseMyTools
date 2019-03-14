@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, registerUser, updateUser, getUserData } from '../actions';
 import styled from 'styled-components';
+import { SubmitBtn } from '../styles';
 
 const FormComponent = styled.form`
     width: 18rem;
@@ -10,6 +11,10 @@ const FormComponent = styled.form`
 
 const Title = styled.h1`
     text-align: center;
+    background-color: #394147;
+    color: white;
+    margin-bottom: 0;
+    padding: 10px;
 `;
 
 class UserForm extends Component {
@@ -120,7 +125,7 @@ class UserForm extends Component {
                         value={this.state.password}
                     />
 
-                    <input
+                    <SubmitBtn
                         type="submit"
                         name="submit"
                         className="btn btn-primary"

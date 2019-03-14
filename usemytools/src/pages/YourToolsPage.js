@@ -28,6 +28,16 @@ const CenterButtonDiv = styled.div`
     margin: 0 auto;
 `;
 
+const ALink = styled(FWLink)`
+    background-color: #D1BD88 !important;
+    border: none !important;
+
+    &:hover {
+        background-color: white !important;
+        color: #D1BD88 !important;
+        border: 1px #D1BD88 solid !important;
+    }
+`;
 class ToolsPage extends Component {
     componentDidMount() {
         if(this.props.tools.length === 0){
@@ -48,7 +58,7 @@ class ToolsPage extends Component {
             <>
                 <Title>Your tools</Title>
                 <CenterButtonDiv>
-                    <FWLink to="/profile/tools/new" className="btn btn-primary">Add new tool</FWLink>
+                    <ALink to="/profile/tools/new" className="btn btn-primary">Add new tool</ALink>
                 </CenterButtonDiv>
 
                 <br/>

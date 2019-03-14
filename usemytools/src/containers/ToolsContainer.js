@@ -1,12 +1,17 @@
 import React from 'react';
 import Tool from '../components/Tool';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledLink = styled(Link)`
+    text-decoration: none !important;
+`;
 
 export default (props) => {
     return (
         <>
             {props.tools.map(tool => 
-            <Link to={`/tools/${tool.id}`} key={tool.id}>
+            <StyledLink to={`/tools/${tool.id}`} key={tool.id}>
                 <Tool
                     key={tool.id}
                     id={tool.id}
@@ -20,7 +25,7 @@ export default (props) => {
                         : {first_name: '', last_name: ''}
                     }
                 />
-            </Link>)}
+            </StyledLink>)}
         </>
     );
 }

@@ -16,27 +16,18 @@ import styled from 'styled-components';
 
 const NavbarBrandStyled = styled(NavbarBrand)`
     font-size: 24px !important;
+    color: #D1BD88 !important;
 `;
 
 const NavbarStyled = styled(Navbar)`
     margin-bottom: 5rem;
     border-bottom: 1px solid lightgray;
+    background: #314D69;
 `;
 
-
-// const NavbarInput = styled.input`
-//     width: 200px;
-//     text-align: center;
-//     box-sizing: border-box;
-//     background: url(https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_search_48px-128.png);
-//     background-color: rgb(250, 250, 250);
-//     background-size: 16px;
-//     background-repeat: no-repeat;
-//     background-position: 54px 50%;
-//     &:focus {
-//         background-position: 0;
-//     }
-// `;
+const LinkStyled = styled(Link)`
+    color: white !important;
+`;
 
 class NavbarComponent extends Component {
     constructor(props) {
@@ -88,7 +79,7 @@ class NavbarComponent extends Component {
         ];
 
         return (
-            <NavbarStyled color="white" light expand="md">
+            <NavbarStyled light expand="md">
                 <NavbarBrandStyled href="/">
                     UseMyTools
                 </NavbarBrandStyled>
@@ -97,23 +88,23 @@ class NavbarComponent extends Component {
                     <Nav className="ml-auto" navbar>
                         {!this.props.authenticated && navlinksPublic.map((elem, i) =>
                             <NavItem key={i}>
-                                <Link to={elem.linkTo} className='nav-link'>
+                                <LinkStyled to={elem.linkTo} className='nav-link'>
                                     {elem.text}
-                                </Link>
+                                </LinkStyled>
                             </NavItem>
                         )}
                         {this.props.authenticated && navlinksPrivate.map((elem, i) =>
                             <NavItem key={i}>
-                                <Link to={elem.linkTo} className='nav-link'>
+                                <LinkStyled to={elem.linkTo} className='nav-link'>
                                     {elem.text}
-                                </Link>
+                                </LinkStyled>
                             </NavItem>
                         )}
                         {this.props.authenticated &&
                             <NavItem>
-                                <Link to='/' onClick={this.props.logoutUser} className='nav-link'>
+                                <LinkStyled to='/' onClick={this.props.logoutUser} className='nav-link'>
                                     Log out
-                                </Link>
+                                </LinkStyled>
                             </NavItem>
                         }
                     </Nav>

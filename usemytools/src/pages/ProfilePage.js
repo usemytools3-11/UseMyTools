@@ -32,6 +32,24 @@ const CenterButtonDiv = styled.div`
     margin: 2rem auto;
 `;
 
+const ZLink = styled(WLink)`
+    &:hover {
+        background-color: white !important;
+        color: red !important;
+    }
+`;
+
+const XLink = styled(WLink)`   
+    background-color: #D1BD88 !important;
+    border: none !important;
+
+    &:hover {
+        background-color: white !important;
+        color: #D1BD88 !important;
+        border: 1px #D1BD88 solid !important;
+    }
+`;
+
 const UserDataSection = styled.div`
     width: 18rem;
     max-width: 18rem;
@@ -92,9 +110,9 @@ class ProfilePage extends Component {
                     </UserDataSection>
 
                     <CenterButtonDiv>
-                        <WLink to="/profile/edit" className="btn btn-primary">Edit profile</WLink>
-                        <WLink to="/" onClick={() => this.props.deleteUser(this.props.userID)} className="btn btn-danger">Delete account</WLink>
-                        <WLink to="/profile/tools" className="btn btn-primary">Your tools</WLink>
+                        <XLink to="/profile/edit" className="btn btn-primary">Edit profile</XLink>
+                        <ZLink to="/" onClick={() => this.props.deleteUser(this.props.userID)} className="btn btn-danger">Delete account</ZLink>
+                        <XLink to="/profile/tools" className="btn btn-primary">Your tools</XLink>
                     </CenterButtonDiv>
 
                     <SectionTitle>Items you borrowed:</SectionTitle>

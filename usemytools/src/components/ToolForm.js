@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { getUserData, fetchTool, addNewTool, updateTool } from '../actions';
 import { history } from '../';
 import styled from 'styled-components';
+import { SubmitBtn } from '../styles';
 
 const FormComponent = styled.form`
     width: 24rem;
     margin: 0 auto;
+    background-color: #394147 !important;
+    color: #D1BD88;
 `;
 
 const Title = styled.h1`
@@ -107,7 +110,7 @@ class ToolForm extends Component {
                         value={this.state.photo_url}
                     />
 
-                    <input
+                    <SubmitBtn
                         type="submit"
                         name="submit"
                         className="btn btn-primary"
