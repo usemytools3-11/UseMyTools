@@ -2,7 +2,7 @@ import React from 'react';
 import Tool from '../components/Tool';
 import { Link } from 'react-router-dom';
 
-const ToolsContainer = (props) => {
+export default (props) => {
     return (
         <>
             {props.tools.map(tool => 
@@ -24,5 +24,3 @@ const ToolsContainer = (props) => {
         </>
     );
 }
-
-export default ToolsContainer;

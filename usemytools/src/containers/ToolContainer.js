@@ -1,7 +1,7 @@
 import React from 'react';
 import Tool from '../components/Tool';
 
-const ToolContainer = (props) => {
+export default (props) => {
     return (
         <>
             <Tool
@@ -28,5 +28,3 @@ const ToolContainer = (props) => {
         </>
     );
 }
-
-export default ToolContainer;
