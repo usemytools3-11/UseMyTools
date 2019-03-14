@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, registerUser, updateUser, getUserData } from '../actions';
+import styled from 'styled-components';
+
+const FormComponent = styled.form`
+    width: 18rem;
+    margin: 0 auto;
+`;
+
+const Title = styled.h1`
+    text-align: center;
+`;
 
 class UserForm extends Component {
     constructor(props) {
@@ -69,7 +79,13 @@ class UserForm extends Component {
     render() {
         return (
             <>
-                <form onSubmit={this.props.registerForm ? this.registerUser : this.props.updateForm ? this.updateUser : this.loginUser}>
+                <FormComponent onSubmit={this.props.registerForm ? this.registerUser : this.props.updateForm ? this.updateUser : this.loginUser} className="card md-3">
+                    <Title>
+                        {this.props.registerForm && "Register"}
+                        {this.props.updateForm && "Update user"}
+                        {this.props.loginForm && "Log in"}
+                    </Title>
+                    
                     {(this.props.registerForm || this.props.updateForm) && <>
                         <input
                             type="text"
@@ -107,8 +123,9 @@ class UserForm extends Component {
                     <input
                         type="submit"
                         name="submit"
+                        className="btn btn-primary"
                     />
-                </form>
+                </FormComponent>
             </>
         );
     }
