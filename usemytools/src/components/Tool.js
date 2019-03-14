@@ -68,9 +68,9 @@ const Tool = (props) => {
             {props.singleTool && props.lender_id !== props.userID &&
             <>
                 {!props.is_borrowed &&
-                    <button onClick={props.borrowTool} className="btn btn-success">BORROW</button>
+                    <button onClick={props.borrowTool} className="btn btn-success">BORROW TOOL</button>
                 }
-                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing} className="btn btn-danger">DELETE BORROWING</button>}
+                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing} className="btn btn-danger">RETURN TOOL</button>}
             </>}
         </Card>
     );

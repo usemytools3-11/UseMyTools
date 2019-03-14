@@ -56,7 +56,7 @@ class ToolsPage extends Component {
                 {this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed).length === 0 ? <Label>No items</Label> : 
                     this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => !elem.is_borrowed)} users={this.props.users} />}
 
-                <SectionTitle>Borrowed:</SectionTitle>
+                <SectionTitle>Unavailable:</SectionTitle>
                 {this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed).length === 0 ? <Label>No items</Label> : 
                     this.props.authenticated && <Tools tools={this.props.tools.filter(elem => elem.lender_id === this.props.userID).filter(elem => elem.is_borrowed)} users={this.props.users} />}
             </>
