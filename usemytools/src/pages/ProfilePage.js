@@ -98,8 +98,10 @@ class ProfilePage extends Component {
                     </CenterButtonDiv>
 
                     <SectionTitle>Items you borrowed:</SectionTitle>
-                    {this.props.tools.filter(elem => elem.is_borrowed).filter(elem => toolIDs.indexOf(elem.id) > -1).length === 0 ? <Label>No items</Label> : 
-                        this.props.tools.filter(elem => elem.is_borrowed).filter(elem => toolIDs.indexOf(elem.id) > -1).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
+                    <CenterButtonDiv>
+                        {this.props.tools.filter(elem => elem.is_borrowed).filter(elem => toolIDs.indexOf(elem.id) > -1).length === 0 ? <Label>No items</Label> : 
+                            this.props.tools.filter(elem => elem.is_borrowed).filter(elem => toolIDs.indexOf(elem.id) > -1).map(elem =><Link to={`/tools/${elem.id}`} key={elem.id}><p>{elem.name}</p></Link>)}
+                    </CenterButtonDiv>
                 </>
                 }
                 {this.props.match.params.id && this.props.user &&
