@@ -163,7 +163,7 @@ export function deleteUser(id){
         }
     }
 
-    function receiveDelete(user){
+    function receiveDelete(id){
         return {
             type: USER_DELETE_SUCCESS,
             payload: id
