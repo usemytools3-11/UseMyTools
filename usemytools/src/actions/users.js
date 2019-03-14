@@ -17,6 +17,7 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 import { history } from '../';
+import { logoutUser } from './auth';
 
 export function fetchUsers(){
     return dispatch => {
@@ -136,14 +137,15 @@ export function updateUser(user){
     }
 }
 
-export function deleteUser(user){
+export function deleteUser(id){
     return dispatch => {
-        dispatch(requestDelete(user))
+        dispatch(requestDelete(id))
         axios
-            .delete(API_URL+`/users/${user.id}`, user, {headers: {authorization: localStorage.getItem('jwt')}})
+            .delete(API_URL+`/users/${id}`, {headers: {authorization: localStorage.getItem('jwt')}})
             .then(res => {
                 if(res.status===200){
-                    dispatch(receiveDelete(user.id));
+                    dispatch(receiveDelete(id));
+                    dispatch(logoutUser());
                     history.push('/');
                 }else{
                     dispatch(errorDelete(res.data.error));
@@ -154,17 +156,17 @@ export function deleteUser(user){
     }
 
 
-    function requestDelete(user){
+    function requestDelete(id){
         return {
             type: USER_DELETE_REQUEST,
-            payload: user
+            payload: id
         }
     }
 
     function receiveDelete(user){
         return {
             type: USER_DELETE_SUCCESS,
-            payload: user
+            payload: id
         }
     }
 

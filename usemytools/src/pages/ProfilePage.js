@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserData, fetchTools, borrowFetch, fetchUser } from '../actions';
+import { getUserData, fetchTools, borrowFetch, fetchUser, deleteUser } from '../actions';
 import { Link } from 'react-router-dom';
 
 class ProfilePage extends Component {
@@ -34,6 +34,7 @@ class ProfilePage extends Component {
                     <p>ID: {this.props.userID}</p>
                     <p>{this.props.email}</p>
                     <Link to="/profile/edit">Edit profile</Link>
+                    <button onClick={() => this.props.deleteUser(this.props.userID)}>Delete account</button>
                     <Link to="/profile/tools">Your tools</Link>
 
                     <h1>Your items:</h1>
@@ -70,7 +71,8 @@ const mapDispatchToProps = {
     getUserData,
     fetchTools,
     borrowFetch,
-    fetchUser
+    fetchUser,
+    deleteUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
