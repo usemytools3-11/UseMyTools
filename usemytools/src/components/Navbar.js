@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {
     Collapse,
@@ -112,6 +113,11 @@ class NavbarComponent extends Component {
             </NavbarStyled>
         );
     }
+}
+
+NavbarComponent.propTypes = {
+    authenticated: PropTypes.bool,
+    logoutUser: PropTypes.func
 }
 
 const mapStateToProps = state => {
