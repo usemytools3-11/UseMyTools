@@ -2,32 +2,69 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Card = styled.div`
+    width: 45%;
+    margin: 20px auto;
+
+    &:hover {
+        text-decoration: none;
+    }
+`;
+
+const Title = styled.h1`
+    text-align: center;
+    color: black;
+    text-decoration: none;
+`;
+
+const Image = styled.img`
+    width: 100%;
+    height: 100%;
+`;
+
+const Price = styled.p`
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+`;
+
+const Owner = styled.p`
+    text-align: center;
+    color: black;
+`;
+
+const cardBorder = {
+    border: '1px solid black',
+    borderRadius: '6px'
+};
 
 const Tool = (props) => {
     return (
-        <>
-            <h1>{props.name} by {props.lender_data.first_name} {props.lender_data.last_name}</h1>
+        <Card className="card" style={cardBorder}>
+            <Title>{props.name}</Title>
             {props.singleTool &&
-                <>
-                    Owner:
-                    <Link to={`/profile/${props.lender_id}`}>{props.lender_data.first_name} {props.lender_data.last_name}</Link>
-                </>
+                <Owner>
+                    by <Link to={`/profile/${props.lender_id}`}>{props.lender_data.first_name} {props.lender_data.last_name}</Link>
+                </Owner>
             }
-            <img src={props.photo_url} alt={props.name} style={{width: 150+'px', height: 150+'px'}} />
-            <p>{props.price}</p>
+            <Image src={props.photo_url} alt={props.name} />
+            <Price>${props.price}</Price>
             {props.singleTool && props.lender_id === props.userID && 
             <>
-                <button onClick={props.editTool}>EDIT</button>
-                <button onClick={props.deleteTool}>DELETE</button>
+                <button onClick={props.editTool} className="btn btn-primary">EDIT</button>
+                <button onClick={props.deleteTool} className="btn btn-danger">DELETE</button>
             </>}
             {props.singleTool && props.lender_id !== props.userID &&
             <>
                 {!props.is_borrowed &&
-                    <button onClick={props.borrowTool}>BORROW</button>
+                    <button onClick={props.borrowTool} className="btn btn-success">BORROW</button>
                 }
-                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing}>DELETE BORROWING</button>}
+                {props.is_borrowed && props.borrowerID === props.userID && <button onClick={props.deleteToolBorrowing} className="btn btn-danger">DELETE BORROWING</button>}
             </>}
-        </>
+        </Card>
     );
 }
 
