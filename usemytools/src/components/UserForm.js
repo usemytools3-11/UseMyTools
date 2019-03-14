@@ -79,7 +79,7 @@ class UserForm extends Component {
     render() {
         return (
             <>
-                <FormComponent onSubmit={this.props.registerForm ? this.registerUser : this.props.updateForm ? this.updateUser : this.loginUser} className="card md-3">
+                <FormComponent onSubmit={this.props.registerForm ? this.registerUser : this.props.updateForm ? this.updateUser : this.loginUser} className="card">
                     <Title>
                         {this.props.registerForm && "Register"}
                         {this.props.updateForm && "Update user"}

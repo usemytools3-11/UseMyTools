@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserData, fetchTool, addNewTool, updateTool } from '../actions';
 import { history } from '../';
+import styled from 'styled-components';
+
+const FormComponent = styled.form`
+    width: 24rem;
+    margin: 0 auto;
+`;
+
+const Title = styled.h1`
+    text-align: center;
+`;
 
 class ToolForm extends Component {
     constructor(props) {
@@ -63,7 +73,11 @@ class ToolForm extends Component {
     render() {
         return (
             <>
-                <form onSubmit={this.props.newTool ? this.addNewTool : this.updateTool}>
+                <FormComponent onSubmit={this.props.newTool ? this.addNewTool : this.updateTool} className="card">
+                    <Title>
+                        {this.props.newTool && "New tool"}
+                        {!this.props.newTool && "Update tool"}
+                    </Title>
                     <input
                         type="text"
                         name="name"
@@ -91,8 +105,9 @@ class ToolForm extends Component {
                     <input
                         type="submit"
                         name="submit"
+                        className="btn btn-primary"
                     />
-                </form>
+                </FormComponent>
             </>
         );
     }
