@@ -10,7 +10,6 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
 } from 'reactstrap';
 
 import styled from 'styled-components';
