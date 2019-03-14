@@ -14,7 +14,7 @@ import RegistrationPage from '../pages/RegistrationPage';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
 import RouteAuthNotNeeded from '../hoc/RouteAuthNotNeeded';
 
-const Routes = (props) => {
+export default (props) => {
     return (
         <Router history={props.history}>
             <div>
@@ -36,5 +36,3 @@ const Routes = (props) => {
         </Router>
     );
 }
-
-export default Routes;

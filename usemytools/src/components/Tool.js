@@ -1,11 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getUserData } from '../actions';
+import { Link } from 'react-router-dom';
 
 const Tool = (props) => {
     return (
         <>
             <h1>{props.name} by {props.lender_data.first_name} {props.lender_data.last_name}</h1>
+            {props.singleTool &&
+                <>
+                    Owner:
+                    <Link to={`/profile/${props.lender_id}`}>{props.lender_data.first_name} {props.lender_data.last_name}</Link>
+                </>
+            }
             <img src={props.photo_url} alt={props.name} style={{width: 150+'px', height: 150+'px'}} />
             <p>{props.price}</p>
             {props.singleTool && props.lender_id === props.userID && 

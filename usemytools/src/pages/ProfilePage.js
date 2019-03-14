@@ -4,14 +4,23 @@ import { getUserData, fetchTools, borrowFetch, fetchUser } from '../actions';
 import { Link } from 'react-router-dom';
 
 class ProfilePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            fetched: false
+        }
+    }
+
     componentDidMount() {
         this.props.getUserData();
         this.props.fetchTools();
         this.props.borrowFetch();
-    }
-
-    componentDidUpdate() {
-        if(this.props.userID !== -1 && this.props.user === null && this.props.match.params.id) this.props.fetchUser(this.props.match.params.id);
+        if(!this.state.fetched && this.props.match.params.id){
+            this.props.fetchUser(this.props.match.params.id);
+            this.setState({
+                fetched: true
+            });
+        }
     }
 
     render() {
@@ -53,7 +62,7 @@ const mapStateToProps = state => {
         userID: state.auth.user ? state.auth.user.id : -1,
         tools: state.items.tools || [],
         borrowed: state.items.borrowed || [],
-        user: state.users.user
+        user: state.users.user || null
     }
 }
 
