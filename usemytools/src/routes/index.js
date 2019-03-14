@@ -1,7 +1,7 @@
 import React from 'react';
-import {Router, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route, Redirect} from 'react-router-dom';
 import NavbarContainer from '../containers/NavbarContainer';
-import HomePage from '../pages/HomePage';
+// import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import ToolsPage from '../pages/ToolsPage';
 import ToolPage from '../pages/ToolPage';
@@ -20,7 +20,7 @@ export default (props) => {
             <div>
                 <NavbarContainer />
                 <Switch>
-                    <Route path="/" exact component={RouteAuthNotNeeded(HomePage)}/>
+                    <Route path="/" exact component={() => <Redirect to="/tools"/>}/>
                     <Route path="/login" exact component={RouteAuthNotNeeded(LoginPage)}/>
                     <Route path="/register" exact component={RouteAuthNotNeeded(RegistrationPage)}/>
                     <Route path="/tools" exact component={RouteAuthNeeded(ToolsPage)}/>
