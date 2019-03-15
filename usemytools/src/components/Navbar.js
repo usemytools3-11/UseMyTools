@@ -116,8 +116,8 @@ class NavbarComponent extends Component {
 }
 
 NavbarComponent.propTypes = {
-    authenticated: PropTypes.bool,
-    logoutUser: PropTypes.func
+    authenticated: PropTypes.bool.isRequired,
+    logoutUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

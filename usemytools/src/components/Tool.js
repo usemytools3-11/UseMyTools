@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Card = styled.div`
     width: 45%;
@@ -122,6 +123,29 @@ const Tool = (props) => {
 
         </>
     );
+}
+
+
+Tool.propTypes = {
+    borrowTool: PropTypes.func.isRequired,
+    borrowerID: PropTypes.number.isRequired,
+    deleteTool: PropTypes.func.isRequired,
+    deleteToolBorrowing: PropTypes.func.isRequired,
+    editTool: PropTypes.func.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    lender_data: PropTypes.shape({
+        first_name: PropTypes.string.isRequired,
+        last_name: PropTypes.string.isRequired
+    }),
+    lender_id: PropTypes.number.isRequired,
+    singleTool: PropTypes.bool.isRequired,
+    userID: PropTypes.number.isRequired,
+    name: PropTypes.string,
+    is_borrowed: PropTypes.bool,
+    photo_url: PropTypes.string,
+    price: PropTypes.number
+
 }
 
 const mapStateToProps = state => {
