@@ -15,7 +15,7 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    authenticated: localStorage.getItem('jwt-authenticated') || false,
+    authenticated: JSON.parse(localStorage.getItem('jwt-authenticated')) || false,
     isFetching: false,
     error: null,
     token: localStorage.getItem('jwt') || null,
