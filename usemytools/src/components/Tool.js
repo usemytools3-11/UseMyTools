@@ -127,11 +127,6 @@ const Tool = (props) => {
 
 
 Tool.propTypes = {
-    borrowTool: PropTypes.func.isRequired,
-    borrowerID: PropTypes.number.isRequired,
-    deleteTool: PropTypes.func.isRequired,
-    deleteToolBorrowing: PropTypes.func.isRequired,
-    editTool: PropTypes.func.isRequired,
     getUserData: PropTypes.func.isRequired,
     id: PropTypes.number.isRequired,
     lender_data: PropTypes.shape({
@@ -140,12 +135,16 @@ Tool.propTypes = {
     }),
     lender_id: PropTypes.number.isRequired,
     singleTool: PropTypes.bool.isRequired,
-    userID: PropTypes.number.isRequired,
+    userID: PropTypes.number,
     name: PropTypes.string,
     is_borrowed: PropTypes.bool,
     photo_url: PropTypes.string,
-    price: PropTypes.number
-
+    price: PropTypes.number,
+    borrowTool: PropTypes.func,
+    borrowerID: PropTypes.number,
+    deleteTool: PropTypes.func,
+    deleteToolBorrowing: PropTypes.func,
+    editTool: PropTypes.func,
 }
 
 const mapStateToProps = state => {

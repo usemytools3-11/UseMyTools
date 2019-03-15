@@ -3,6 +3,7 @@ import ToolContainer from '../containers/ToolContainer';
 import { connect } from 'react-redux';
 import { fetchTool, getUserData, deleteTool, borrowTool, deleteToolBorrowing, borrowFetch, fetchUsers } from '../actions';
 import { history } from '../';
+import PropTypes from 'prop-types';
 
 class ToolPage extends Component {
     constructor(props) {
@@ -54,6 +55,24 @@ class ToolPage extends Component {
             </>
         );
     }
+}
+
+ToolPage.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    borrowFetch: PropTypes.func.isRequired,
+    borrowerID: PropTypes.object,
+    deleteTool: PropTypes.func.isRequired,
+    deleteToolBorrowing: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    fetchTool: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    tool: PropTypes.object.isRequired,
+    userID: PropTypes.number.isRequired,
+    users: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => {

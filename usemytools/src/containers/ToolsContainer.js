@@ -17,8 +17,17 @@ export default (props) => {
                     id={tool.id}
                     name={tool.name}
                     photo_url={tool.photo_url}
-                    price={tool.price}
+                    price={Number(tool.price)}
                     lender_id={tool.lender_id}
+
+                    editTool={props.editTool}
+                    deleteTool={props.deleteTool}
+                    borrowTool={props.borrowTool}
+                    deleteToolBorrowing={props.deleteToolBorrowing}
+                    is_borrowed={tool.is_borrowed}
+                    userID={props.userID}
+                    singleTool={false}
+
                     lender_data={
                         props.users.find(elem => elem.id === tool.lender_id) !== undefined
                         ? props.users.find(elem => elem.id === tool.lender_id)

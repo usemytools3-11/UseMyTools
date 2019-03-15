@@ -3,6 +3,7 @@ import Tools from '../containers/ToolsContainer';
 import { connect } from 'react-redux';
 import { fetchTools, getUserData, fetchUsers } from '../actions';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Title = styled.h1`
     text-align: center;
@@ -72,6 +73,20 @@ class ToolsPage extends Component {
             </>
         );
     }
+}
+
+ToolsPage.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    fetchTools: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    tools: PropTypes.array.isRequired,
+    userID: PropTypes.number.isRequired,
+    users: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => {

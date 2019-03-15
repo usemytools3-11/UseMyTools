@@ -4,6 +4,7 @@ import { getUserData, fetchTool, addNewTool, updateTool } from '../actions';
 import { history } from '../';
 import styled from 'styled-components';
 import { SubmitBtn } from '../styles';
+import PropTypes from 'prop-types';
 
 const FormComponent = styled.form`
     width: 24rem;
@@ -24,6 +25,7 @@ const cardBorder = {
 class ToolForm extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
 
         this.state = {
             name: '',
@@ -119,6 +121,17 @@ class ToolForm extends Component {
             </>
         );
     }
+}
+
+ToolForm.propTypes = {
+    addNewTool: PropTypes.func.isRequired,
+    fetchTool: PropTypes.func.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    newTool: PropTypes.bool.isRequired,
+    // tool: PropTypes.func.,
+    updateTool: PropTypes.func.isRequired,
+    userID: PropTypes.number.isRequired,
+    toolID: PropTypes.number
 }
 
 const mapStateToProps = state => {

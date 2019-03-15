@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserData } from '../actions';
 import UserUpdateContainer from '../containers/UserUpdateContainer';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Title = styled.h1`
     text-align: center;
@@ -45,6 +46,19 @@ class EditUserPage extends Component {
             </>
         );
     }
+}
+
+EditUserPage.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    last_name: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    userID: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => {

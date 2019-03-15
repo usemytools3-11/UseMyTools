@@ -4,7 +4,7 @@ import ToolFormContainer from '../containers/ToolFormContainer';
 export default (props) => {
     return (
         <>
-            <ToolFormContainer newTool={false} toolID={props.match.params.id} />
+            <ToolFormContainer newTool={false} toolID={Number(props.match.params.id)} />
         </>
     );
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserData, fetchTools, borrowFetch, fetchUser, deleteUser } from '../actions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Title = styled.h1`
     text-align: center;
@@ -131,6 +132,25 @@ class ProfilePage extends Component {
             </>
         );
     }
+}
+
+ProfilePage.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    borrowFetch: PropTypes.func.isRequired,
+    borrowed: PropTypes.array.isRequired,
+    deleteUser: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired,
+    fetchTools: PropTypes.func.isRequired,
+    fetchUser: PropTypes.func.isRequired,
+    first_name: PropTypes.string.isRequired,
+    getUserData: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    tools: PropTypes.array.isRequired,
+    userID: PropTypes.number.isRequired,
+    user: PropTypes.object
 }
 
 const mapStateToProps = state => {
