@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 token: localStorage.getItem('jwt') || null,
-                authenticated: localStorage.getItem('jwt-authenticated') || false
+                authenticated: JSON.parse(localStorage.getItem('jwt-authenticated')) || false
             }
 
         case USER_LOGIN_FAILURE:
@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 token: localStorage.getItem('jwt') || null,
-                authenticated: localStorage.getItem('jwt-authenticated') || false
+                authenticated: JSON.parse(localStorage.getItem('jwt-authenticated')) || false
             }
 
         case USER_LOGOUT_FAILURE:

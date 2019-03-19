@@ -37,16 +37,18 @@ class ToolsPage extends Component {
         this.returnFilteredObjects = this.returnFilteredObjects.bind(this);
     }
     componentDidMount() {
-        if(this.props.tools.length === 0){
-            this.props.fetchTools();
-        }
-
-        if(this.props.users.length === 0){
-            this.props.fetchUsers();
-        }
-
-        if(this.props.userID === -1){
-            this.props.getUserData();
+        if(this.props.authenticated){
+            if(this.props.tools.length === 0){
+                this.props.fetchTools();
+            }
+    
+            if(this.props.users.length === 0){
+                this.props.fetchUsers();
+            }
+    
+            if(this.props.userID === -1){
+                this.props.getUserData();
+            }
         }
     }
 

@@ -80,14 +80,16 @@ class ProfilePage extends Component {
     }
 
     componentDidMount() {
-        this.props.getUserData();
-        this.props.fetchTools();
-        this.props.borrowFetch();
-        if(!this.state.fetched && this.props.match.params.id){
-            this.props.fetchUser(this.props.match.params.id);
-            this.setState({
-                fetched: true
-            });
+        if(this.props.authenticated){
+            this.props.getUserData();
+            this.props.fetchTools();
+            this.props.borrowFetch();
+            if(!this.state.fetched && this.props.match.params.id){
+                this.props.fetchUser(this.props.match.params.id);
+                this.setState({
+                    fetched: true
+                });
+            }
         }
     }
 
