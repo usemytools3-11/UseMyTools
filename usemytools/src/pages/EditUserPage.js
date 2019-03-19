@@ -24,8 +24,10 @@ const Property = styled.h3`
 
 class EditUserPage extends Component {
     componentDidMount() {
-        if(this.props.first_name.length === 0 || this.props.last_name.length === 0 || this.props.email.length === 0){
-            this.props.getUserData();
+        if(this.props.authenticated){
+            if(this.props.first_name.length === 0 || this.props.last_name.length === 0 || this.props.email.length === 0){
+                this.props.getUserData();
+            }
         }
     }
 

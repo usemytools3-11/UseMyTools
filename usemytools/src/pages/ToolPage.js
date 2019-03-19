@@ -15,11 +15,13 @@ class ToolPage extends Component {
         this.borrowTool = this.borrowTool.bind(this);
     }
     componentDidMount() {
-        this.props.fetchUsers();
-        this.props.fetchTool(this.props.match.params.id);
-        this.props.borrowFetch();
-        if(this.props.userID === -1){
-            this.props.getUserData();
+        if(this.props.authenticated) {
+            this.props.fetchUsers();
+            this.props.fetchTool(this.props.match.params.id);
+            this.props.borrowFetch();
+            if(this.props.userID === -1){
+                this.props.getUserData();
+            }
         }
     }
 
